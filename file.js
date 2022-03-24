@@ -1,15 +1,18 @@
 const { open, close, appendFile, ...fs } = require('fs')
-const Buffer = require('buffer')
-const buf = Buffer.from('hello world', 'utf8')
+// const Buffer = require('buffer')
+// const buf = Buffer.from('hello world', 'utf8')
 /**
  * fd -> 表示文件描述符的整数
  */
 open('./test.txt', 'r+', (err, fd) => {
     if (!err) {
         console.log(fd)
-        fs.readv(fd, buf, (err, bytesRead, buffers) => {
-            console.log(err, bytesRead, buffers)
+        fs.writeFile(fd, '测试一下', (err) => {
+            console.log(err, 'fs.write');
         })
+        // fs.readv(fd, buf, (err, bytesRead, buffers) => {
+        //     console.log(err, bytesRead, buffers)
+        // })
         // fs.read(fd, (err, bytesRead , buffer) => {
         //     console.log(err, bytesRead, buffer)
         // })
@@ -56,7 +59,7 @@ fs.exists('./test3.txt', (err) => {
 //     console.log(err, stats)
 // })
 
-fs.readdir('./src1', (err, files) => {
+fs.readdir('./src2', (err, files) => {
     console.log(err, files)
 })
 
@@ -64,6 +67,30 @@ fs.readFile('./test.txt', 'utf-8', (err, data) => {
     console.log(err, data)
 })
 
-fs.readlink('./src1/test.txt.lnk', (err, link) => {
-    console.log(err, link, '符号链接')
+// fs.readlink('./src1/test.txt.lnk', (err, link) => {
+//     console.log(err, link, '符号链接')
+// })
+fs.realpath('./src', (err, path) => {
+    console.log(path, 'fs.realpath');
 })
+
+// fs.rename('./test9.txt', './test99.txt', (err) => {
+//     console.log(err, 'fs.rename');
+// })
+
+// fs.rm('./src4', (err) => {
+//     console.log(err, '删除了');
+// })
+
+// fs.stat('./src2', (err, data) => {
+//     console.log(err, data, 'fs.stat');
+// })
+
+// fs.symlink('./test.txt', './mewtwo.txt', 'file',  (err) => {
+//     console.log('fs.symlink', err);
+// });
+
+
+// fs.unlink('./src4',  (err) => {
+//     console.log('fs.unlink', err);
+// });
