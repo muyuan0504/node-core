@@ -42,6 +42,10 @@ oneBlob.text().then((data) => {
     console.log(data, '打印看看oneblob');
 });
 
+oneBlob.arrayBuffer().then((res) => {
+    console.log(res, '打印arraybuffer');
+});
+
 const newBlob = oneBlob.slice(0, 2);
 
 newBlob.text().then((data) => {
