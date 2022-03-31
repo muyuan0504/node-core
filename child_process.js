@@ -2,7 +2,7 @@
  * @Date: 2022-03-30 23:05:08
  * @LastEditors: jimouspeng
  * @Description: nodejs-子进程
- * @LastEditTime: 2022-03-31 23:23:28
+ * @LastEditTime: 2022-03-31 23:31:07
  * @FilePath: \node\child_process.js
  */
 
@@ -17,6 +17,7 @@ const syncChildA = spawn('node', ['child_a.js'], {
 })
 
 /** 与主进程的stdin是可读流不同，创建的子进程的stdin是可写流 */
+console.log(syncChildA.stdin.writable, syncChildA.stdout.writable, '看看子进程属性') // true false 看看子进程属性
 syncChildA.stdin.write('父进程给childA发送消息')
 
 syncChildA.stdout.on('data', (chunk) => {
