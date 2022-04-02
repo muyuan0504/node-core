@@ -1,13 +1,13 @@
 /*
  * @Date: 2022-03-30 23:05:08
- * @LastEditors: jimouspeng
+ * @LastEditors: Please set LastEditors
  * @Description: nodejs-子进程
- * @LastEditTime: 2022-03-31 23:31:07
+ * @LastEditTime: 2022-04-02 11:40:18
  * @FilePath: \node\child_process.js
  */
 
 const path = require('path')
-const execCwd = path.resolve('./childSrc')
+const execCwd = path.resolve('./child-src')
 
 /** 异步创建子进程方式 */
 const { spawn, exec, execFile, fork } = require('child_process')
