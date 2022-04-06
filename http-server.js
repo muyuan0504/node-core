@@ -21,7 +21,18 @@ const server = createServer((req, res) => {
     }
     console.log(url);
     const clientReq = get('http://127.0.0.1:9527', { headers: { slef: 'jimous' } }, (res) => {
-        const { statusCode, headers } = res;
+        res.on('close', (msg) => {
+            console.log('客户端端底层连接已关闭', msg); // msg undefined
+        });
+        const { headers, method, complete, httpVersion, url, statusCode, statusMessage } = res;
+        console.log('开始打印客户端请求属性');
+        console.log('headers: ', headers);
+        console.log('method: ', method); // null
+        console.log('complete: ', complete);
+        console.log('httpVersion: ', httpVersion);
+        console.log('url: ', url); // ''
+        console.log('statusCode: ', statusCode);
+        console.log('statusMessage: ', statusMessage);
         if (statusCode !== 200) {
             res.resume(); // 消费响应数据以释放内存
         }
@@ -50,7 +61,15 @@ const server = createServer((req, res) => {
 
     // clientReq.end(); // get创建的请求会自动调用req.end()
     function handlerResponse(data) {
-        res.writeHead(200, { 'content-Type': 'application/json', 'sleft-content': 'jimous-server' });
+        res.writeHead(200, {
+            'content-Type': 'application/json',
+            'sleft-content': 'jimous-server',
+            Trailer: 'jimous-header',
+        });
+        res.addTrailers({
+            'jimous-header': 'jimous is cool',
+        });
+        res.statusMessage = 'jimous status message'
         res.end('jimous server' + data);
     }
     // console.log(req.writable, res.writable); // undefined, true

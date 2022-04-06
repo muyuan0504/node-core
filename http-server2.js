@@ -8,7 +8,17 @@
 const { createServer } = require('http');
 
 createServer((req, res) => {
-    const { headers, method } = req;
+    req.on('close', (msg) => {
+        console.log('服务端底层连接已关闭', msg); // msg undefined
+    });
+    const { headers, method, complete, httpVersion, url, statusCode, statusMessage } = req;
+    console.log('headers: ', headers);
+    console.log('method: ', method);
+    console.log('complete: ', complete);
+    console.log('httpVersion: ', httpVersion);
+    console.log('url: ', url);
+    console.log('statusCode: ', statusCode); // null
+    console.log('statusMessage: ', statusMessage); // null
     if (method === 'POST') {
         console.log(req);
     }
