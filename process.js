@@ -10,21 +10,20 @@ process.on('exit', (code) => {
     console.log('进程执行exit', code);
 });
 
-let i = 0;
+const chooiceList = [1, 2, 3];
 
-// setInterval(() => {
-//     i++
-//     console.log(i)
-//     if (i > 5) {
-//         process.exit()
-//         // process.abort()
-//     }
-// }, 1000)
-
-process.stdout.write(' \033[31m  輸入一下唄： \033[39m');
+process.stdout.write('\033[31m1. 輸入一下唄 \n2.sfesf\n3.sfesfe\033[39m');
 process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let i = 3;
 
 process.stdin.on('data', (data) => {
     console.log(`You typed ${data.toString()}`);
-    process.exit();
+    i--;
+    if (i > 0) {
+        process.stdout.write(' \033[31m  輸入一下唄： \033[39m');
+    } else {
+        process.exit();
+    }
 });
