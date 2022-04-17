@@ -1,24 +1,25 @@
 {
-    "name": "node",
-    "version": "1.0.0",
-    "description": "",
-    "main": "a.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jimouspeng/node.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/jimouspeng/node/issues"
-    },
-    "homepage": "https://github.com/jimouspeng/node#readme",
-    "dependencies": {
-        "chalk": "^5.0.1",
-        "inquirer": "^8.2.2"
-    }
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimouspeng/node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimouspeng/node/issues"
+  },
+  "homepage": "https://github.com/jimouspeng/node#readme",
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "formidable": "^2.0.1",
+    "inquirer": "^8.2.2"
+  }
 }
