@@ -4,15 +4,28 @@ const fs = require('fs');
 
 createServer((req, res) => {
     console.log(req.method);
-    /** 统一设置跨域 */
+    /**
+     * 统一设置跨域配置Access-Control-Allow-Headers:
+     * 设置对服务器的CORS请求支持名为X-Custom-Header的自定义标头
+     * 可支持的请求首部名字。请求头会列出所有支持的首部列表，用逗号隔开
+     * 简单首部
+     * 如 simple headers、Accept、Accept-Language、Content-Language、Content-Type 它们始终是被支持的（只限于解析后的值为 application/x-www-form-urlencoded、multipart/form-data 或 text/plain 三种MIME类型（不包括参数）），不需要在这个首部特意列出
+     */
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
-    // 设置对服务器的CORS请求支持名为X-Custom-Header的自定义标头
-    res.setHeader('Access-Control-Allow-Headers', 'x-custom-header');
+    res.setHeader('Access-Control-Allow-Headers', 'x-custom-header,Content-Type');
+    res.setHeader('Access-Control-Max-Age', 600);
+    // res.setHeader('Access-Control-Allow-Credentials', 'true');
+    // res.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Token");
     if (req.method === 'OPTIONS') {
         /** 处理options请求 */
-        console.log('option request');
-        // res.setHeader('Access-Control-Allow-Headers', 'cookie');
+        // res.writeHead(200, {
+        //     'Access-Control-Allow-Origin': '*',
+        //     'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
+        //     'Access-Control-Allow-Headers': 'x-custom-header',
+        //     'Access-Control-Max-Age': 600,
+        // });
+        res.writeHead(200);
         res.on('close', () => {
             console.log('options请求被return');
         });
@@ -99,13 +112,25 @@ createServer((req, res) => {
             };
             res.end(JSON.stringify(body));
         });
+    } else if (req.url === '/get_info') {
+        let reqBody = Buffer.alloc(0);
+        req.on('data', (chunk) => {
+            reqBody = Buffer.concat([reqBody, chunk]);
+        });
+        req.on('end', () => {
+            console.log(decodeURI(reqBody).toString());
+            const bodyParam = JSON.parse(reqBody.toString());
+            console.log(bodyParam.userId, '拿到userid', bodyParam.name);
+        });
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
+        const body = {
+            code: -1,
+            data: [],
+            msg: '请求路由不对哦~',
+        };
+        res.end(JSON.stringify(body));
     } else {
-        // const body = {
-        //     code: 0,
-        //     data: [],
-        //     msg: '请求路由不对哦~',
-        // };
-        res.writeHead(200, { 'content-type': 'text/html;charset-utf-8' });
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
         const htmlStr = fs.createReadStream('./error.html');
         res.on('close', () => {
             console.log('res----close');
