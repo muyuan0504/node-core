@@ -61,6 +61,7 @@ fs.exists('./test3.txt', (err) => {
 
 fs.readdir('./src2', (err, files) => {
     console.log(err, files)
+    
 })
 
 fs.readFile('./test.txt', 'utf-8', (err, data) => {
