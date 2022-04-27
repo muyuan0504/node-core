@@ -11,6 +11,11 @@ const server = connect();
 
 let flagText = 'origin';
 
+server.use((req, res, next) => {
+    console.log('请求入口');
+    next();
+});
+
 server.use(function (req, res, next) {
     console.log(req.headers.cookie);
     if (/favicon.ico/.test(req.url)) {
@@ -25,7 +30,7 @@ server.use(function (req, res, next) {
 });
 
 server.use(function (req, res) {
-    console.log('还是进来了？')
+    console.log('还是进来了？');
     /** charset=utf-8: 解决中文乱码 */
     res.writeHead(200, {
         'Content-Type': 'text/html;charset=utf-8',
