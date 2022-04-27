@@ -73,7 +73,7 @@ createServer((req, res) => {
         console.log(req);
         /** 通过FormData对象上传文件 */
         let fileBuf = Buffer.alloc(0);
-        res.writeHead(200, { 'Content-Type': 'application/json;charset=utf-8' });
+        res.writeHead(200, { 'Content-Type': 'application/json;charset=utf-8' }); // 解决中文乱码
         const writeStream = fs.createWriteStream('./picinfo.txt');
         const writeStream2 = fs.createWriteStream('./picinfo2.txt');
         const writeStream3 = fs.createWriteStream('./picinfo3.txt');
