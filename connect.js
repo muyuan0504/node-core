@@ -7,16 +7,16 @@
 
 const connect = require('connect');
 
-const server = connect();
+const app = connect();
 
 let flagText = 'origin';
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
     console.log('请求入口');
     next();
 });
 
-server.use(function (req, res, next) {
+app.use(function (req, res, next) {
     console.log(req.headers.cookie);
     if (/favicon.ico/.test(req.url)) {
         // 过滤掉图标请求
@@ -29,7 +29,7 @@ server.use(function (req, res, next) {
     next();
 });
 
-server.use(function (req, res) {
+app.use(function (req, res) {
     console.log('还是进来了？');
     /** charset=utf-8: 解决中文乱码 */
     res.writeHead(200, {
@@ -39,6 +39,10 @@ server.use(function (req, res) {
     flagText = 'origin';
 });
 
-server.listen(3000, () => {
+// proto.listen = function listen() {
+//     var server = http.createServer(this);
+//     return server.listen.apply(server, arguments);
+// };
+app.listen(3000, () => {
     console.log('service open--');
 });
