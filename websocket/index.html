@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let i = 0;
+            // 打开一个WebSocket:
+            var ws = new WebSocket('ws://localhost:3000');
+            ws.onopen = function () {
+                console.log('sokcet---');
+                // Web Socket 已连接上，使用 send() 方法发送数据
+                ws.send('发送数据');
+            };
+            ws.onclose = function () {
+                // 关闭 websocket
+                alert('连接已关闭...');
+            };
+            // 响应onmessage事件:
+            ws.onmessage = function (msg) {
+                console.log(msg);
+                i++;
+                setTimeout(() => {
+                    ws.send('拿到了吗' + i);
+                }, 2000);
+            };
+            // 给服务器发送一个字符串:
+            // ws.send('Hello!');
+        </script>
+    </body>
+</html>
