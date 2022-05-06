@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const source = new EventSource('http://127.0.0.1:8844/stream');
+            source.onmessage = function (event) {
+                console.log(event);
+            };
+            source.onerror = function (event) {
+                console.log('error', event);
+            };
+            setTimeout(() => {
+                source.close();
+            }, 10000);
+            /** 自定义事件 */
+            source.addEventListener(
+                'jimous',
+                function (event) {
+                    var data = event.data;
+                    console.log('自定义事件', event);
+                    // handle message
+                },
+                false
+            );
+        </script>
+    </body>
+</html>
