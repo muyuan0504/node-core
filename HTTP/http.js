@@ -23,7 +23,7 @@ const httpCtx = http.createServer((req, res) => {
     // res.setHeader('Cache-Control', 'max-age=60');
     res.writeHead(200, {
         'content-Type': 'application/json;charset=utf-8',
-        // Expires: new Date('2022-08-19').toGMTString(),
+        Expires: new Date('2022-08-19').toGMTString(),
         // 'Cache-Control': 'max-age=60000',
         // Etag: '1212',
         'Last-Modified': new Date().getTime(),
