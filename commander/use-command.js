@@ -4,6 +4,8 @@ const { program } = require('commander')
 
 // const program = new Command()
 
+console.log(Object.keys(program), typeof program.option)
+
 program.name('use-command').description('CLI to get user info').version('0.0.1')
 
 /** 对于option，要保证输入的类型与定义的类型一致，如果不指定类型，则为boolean类型
@@ -11,14 +13,14 @@ program.name('use-command').description('CLI to get user info').version('0.0.1')
  *     node ./index.js --school=false  ->  报错，false不需要指定，默认为undefined
  */
 program
-    .command('getyou')
+    .command('getUserInfo')
     .description('input user name')
     .argument('<string>', 'string to show your name')
     .option('--name <string>', 'for get your input name')
     .option('--school', 'for get your school name')
     .action((str, options) => {
-        console.log('parm-string: ', str)
-        console.log('param-input: ', options)
+        console.log('parm-string: ', str) // str: 获取定义command时声明的argument-<string>参数
+        console.log('param-input: ', options) // options: 声明的option参数
     })
 
 program.parse()
