@@ -16,8 +16,9 @@ program
     .command('getUserInfo')
     .description('input user name')
     .argument('<string>', 'string to show your name')
-    .option('--name <string>', 'for get your input name')
-    .option('--school', 'for get your school name')
+    .option('-n --name <string>', 'for get your input name')
+    // -s是快捷参数，用快捷参数时，只需要-s ncu即可，不需要等号连接; --school-name会被解析为 schoolName
+    .option('-s --school-name <value>', 'for get your school name')
     .action((str, options) => {
         console.log('parm-string: ', str) // str: 获取定义command时声明的argument-<string>参数
         console.log('param-input: ', options) // options: 声明的option参数
