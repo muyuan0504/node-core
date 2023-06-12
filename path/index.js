@@ -14,7 +14,5 @@ Object.keys(path).forEach((param) => {
 console.log('path-method: ', JSON.stringify(pathMethods))
 console.log('path-property: ', pathProperty)
 
-const posix = path.posix
-
-const joinPath = path.join(__dirname, './index.js')
-console.log('0', joinPath, __dirname)
+require('./path-property.js')
+require('./path-methods.js')

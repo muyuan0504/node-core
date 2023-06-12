@@ -1,4 +1,4 @@
-/** https://www.npmjs.com/package/colorette */
+/** 终端控制台彩色文本 https://www.npmjs.com/package/colorette */
 // import { blue, bold, underline } from 'colorette'
 const { blue, bold, underline, yellow } = require('colorette')
 
