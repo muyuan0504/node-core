@@ -1,24 +1,26 @@
 {
-  "name": "node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jimouspeng/node.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jimouspeng/node/issues"
-  },
-  "homepage": "https://github.com/jimouspeng/node#readme",
-  "dependencies": {
-    "colorette": "^2.0.20",
-    "commander": "^10.0.1"
-  }
+    "name": "node-core",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "path": "node ./path/index.js",
+        "process": "node ./process/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jimouspeng/node.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jimouspeng/node/issues"
+    },
+    "homepage": "https://github.com/jimouspeng/node#readme",
+    "dependencies": {
+        "colorette": "^2.0.20",
+        "commander": "^10.0.1"
+    }
 }
