@@ -16,4 +16,8 @@ console.log('processMethods: ', JSON.stringify(processMethods), '\n')
 
 console.log('processProperty: ', JSON.stringify(processProperty), '\n')
 
-require('./process-property')
+require('./property')
+
+require('./signal-event')
+
+require('./methods')

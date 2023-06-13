@@ -14,5 +14,5 @@ Object.keys(path).forEach((param) => {
 console.log('path-method: ', JSON.stringify(pathMethods))
 console.log('path-property: ', pathProperty)
 
-require('./path-property.js')
-require('./path-methods.js')
+require('./property.js')
+require('./methods.js')
