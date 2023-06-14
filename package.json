@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "path": "node ./path/index.js",
-        "process": "node --throw-deprecation --trace-deprecation --no-deprecation ./process/index.js",
+        "process": "node --trace-warnings --enable-source-maps --throw-deprecation --trace-deprecation --no-deprecation ./process/index.js --a=1",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

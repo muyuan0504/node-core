@@ -23,15 +23,22 @@ console.log('execPath: ', execPath)
  * throwDeprecation: 是否启动进程时设置了--throw-deprecation标志
  * noDeprecation: 是否启动进程时设置了--no-deprecation标志
  * release: 当前node版本相关的元数据
+ * argv: 启动nodejs进程时传入的命令行参数，第一个元素将是 process.execPath
+ * argv0: nodejs启动时传入的argv[0]原始值的只读副本
+ * execArgv: nodejs进程启动时传入的一组特定于Nodejs的命令行选项。eg: --throw-deprecation --trace-warnings等
  */
 process.exitCode = 1001
 const { config, exitCode, traceDeprecation, throwDeprecation, noDeprecation, release } = process
-console.log('config: ', config)
+const { argv, argv0, execArgv } = process
+console.log('config [key]: ', Object.keys(config))
 console.log('exitCode: ', exitCode)
 console.log('traceDeprecation: ', traceDeprecation)
 console.log('throwDeprecation: ', throwDeprecation)
 console.log('noDeprecation: ', noDeprecation)
-console.log('release: ', release)
+console.log('release [key]: ', Object.keys(release))
+console.log('argv: ', JSON.stringify(argv))
+console.log('argv0: ', argv0, typeof argv0) // string
+console.log('execArgv: ', execArgv)
 return
 
 /** 进程系统属性

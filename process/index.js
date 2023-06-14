@@ -21,3 +21,5 @@ require('./property')
 require('./signal-event')
 
 require('./methods')
+
+// require('./io-interactive')
