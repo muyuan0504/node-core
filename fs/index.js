@@ -2,4 +2,6 @@
 
 // require('./file-check')
 // require('./file-symbo-link')
-require('./file-dir')
+// require('./file-dir')
+
+require('./file')
