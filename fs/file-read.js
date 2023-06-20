@@ -1,8 +1,9 @@
-/** fs-文件 / 文件夹 操作
+/** fs-文件 / 文件夹 读取操作
  * fs.readFile() 函数缓冲整个文件。 为了最小化内存成本，在可能的情况下优先通过 fs.createReadStream() 进行流式传输
  */
 const fs = require('fs')
 const path = require('path')
+const filePath = path.resolve(__dirname, './a.text')
 
 /** 文件操作-基于fd和path的两种方式, 基于AbortController类实现读取中断操作
  * fs.open(path[, flags[, mode]], callback):
@@ -26,22 +27,22 @@ const path = require('path')
  *     从 fd 指定的文件读取并使用 readv() 写入 ArrayBufferView 的数组
  *     读取多个文件并将它们合并成一个缓冲区。buffers 参数是一个 Buffer 数组，用于存储读取的数据
  */
-const filePath = path.resolve(__dirname, './a.text')
+
 const openFlags = 'r'
 const statConfig = { bigint: false } //  返回的 <fs.StatFs> 对象中的数值是否应为 bigint, 默认为false
 fs.open(filePath, openFlags, (err, fd) => {
     if (err) return
-    console.log('fs.open打开的文件描述符：', fd)
+    console.log('fs.open 打开的文件描述符：', fd)
     fs.fstat(fd, statConfig, (err, stats) => {
         if (err) return
         console.log('fs.fstat文件属性： ', JSON.stringify(Object.keys(stats)))
-        fs.close(fd, (err) => {
-            console.log('close fd: ', err)
-        })
+        // fs.close(fd, (err) => {
+        //     console.log('close fd: ', err)
+        // })
         const bf = Buffer.alloc(10)
         const position = null
         fs.readv(fd, [bf], position, (err, bytesRead) => {
-            console.log(err, bytesRead, bf.toString(), 'hahah哈哈哈哈')
+            console.log('fs.readv 读取文件: ', err, bytesRead, bf.toString())
             fs.close(fd)
         })
     })
@@ -50,7 +51,7 @@ fs.open(filePath, openFlags, (err, fd) => {
 if (fs.statfs) {
     fs.statfs(filePath, statConfig, (err, stats) => {
         if (!err) {
-            console.log('fs.statfs文件属性： ', JSON.stringify(Object.keys(stats)))
+            console.log('fs.statfs 文件属性: ', JSON.stringify(Object.keys(stats)))
         }
     })
 }
@@ -72,7 +73,7 @@ fs.readFile(filePath, readOptions, (err, data) => {
     }
     console.log('fs.readFile 读取文件: ', err, data)
 })
-ac.abort()
+// ac.abort()
 
 const readStreamOptions = {
     flags: 'r', // 默认为 'r'
@@ -87,9 +88,18 @@ const readStreamOptions = {
 }
 const readFileStream = fs.createReadStream(filePath, readStreamOptions)
 readFileStream.on('data', (chunk) => {
-    console.log('fs.createReadStream解析chunks: ', chunk)
+    console.log('fs.createReadStream 解析chunks ', chunk)
 })
 
 /** 文件/夹 信息获取
  *
  */
+
+/** Promise API */
+const { promises } = require('fs', 'r')
+const usePromise = async () => {
+    const fhCtx = await promises.open(filePath)
+    console.log('fileHandle 实例: ', fhCtx.fd)
+}
+
+usePromise()

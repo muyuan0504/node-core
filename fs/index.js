@@ -4,4 +4,6 @@
 // require('./file-symbo-link')
 // require('./file-dir')
 
-require('./file')
+// require('./file-read')
+
+require('./file-handle.js')
