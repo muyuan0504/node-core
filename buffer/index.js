@@ -8,9 +8,9 @@
 const { Buffer } = require('buffer')
 
 /** 构建Buffer -> 常用方法：new Buffer, alloc, from
- * 
+ *
  * 安全创建和常规创建，区别在于是否在新分配Buffer实例在创建时
- * 
+ *
  * New Buffer: 在 Node.js 6.0.0 之前的版本中，Buffer 实例是使用 Buffer 构造函数创建的，它根据提供的参数以不同的方式分配返回的 Buffer：
  *   将数字作为第一个参数传给 Buffer()（例如 new Buffer(10)）会分配指定大小的新 Buffer 对象
  *   传入字符串、数组或 Buffer 作为第一个参数会将传入的对象的数据复制到 Buffer
@@ -44,11 +44,19 @@ const { Buffer } = require('buffer')
  *   sourceEnd <integer> buf 内停止复制的偏移量（不包括）。 默认值： buf.length
  * 返回： <integer> 复制的字节数
  *
+ * buf.write(string[, offset[, length]][, encoding]): 返回： <integer> 写入的字节数
+ *   根据 encoding 中的字符编码将 string 写入 buf 的 offset 处。 length 参数是要写入的字节数。 如果 buf 没有足够的空间来容纳整个字符串，则只会写入 string 的一部分。 但是，不会写入部分编码的字符
+ *   string <string> 要写入 buf 的字符串。
+ *   offset <integer> 开始写入 string 之前要跳过的字节数。 默认值： 0。
+ *   length <integer> 要写入的最大字节数（写入的字节数不会超过 buf.length - offset）。 默认值： buf.length - offset
+ *   encoding <string> string 的字符编码。 默认值： 'utf8'
+ *
  * buf.fill(value[, offset[, end]][, encoding])：返回： <Buffer> buf 的引用
  *   用指定的 value 填充 buf。 如果没有给定 offset 和 end，则整个 buf 都会被填满，不管当前buf是否有内容
  *   offset <integer> 在开始填充 buf 之前要跳过的字节数。 默认值： 0
  *   end <integer> 停止填充 buf（不包括在内）的位置。 默认值： buf.length
  *
+ * buf.toJSON(): 返回 buf 的 JSON 表示。 JSON.stringify() 在字符串化 Buffer 实例时隐式调用此函数
  *
  * 补充：
  * 在 Node.js 中，Buffer.from(array) 方法接收的 array 参数有以下限制：
@@ -73,6 +81,9 @@ const bfStr = Buffer.from(fillText, 'utf-8')
 // Buffer.from([65, 66, 67])得到的是一个包含ASCII值为65,66和67的字节序列的Buffer对象
 // ASCII值为 65、66 和 67 分别对应字符 'A'、'B' 和 'C',所以当对Buffer对象调用toString，会得到'ABC'
 const bfArray = Buffer.from([65, 66, 67])
+
+const json = JSON.stringify(bfStr)
+console.error('---------- buf.toJSON --------------', json, bfStr.toJSON())
 
 const bufCopy = Buffer.from(fillText)
 const targetLen = bfAllocUnsafe.byteLength
